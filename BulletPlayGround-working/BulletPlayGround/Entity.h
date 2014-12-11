@@ -68,7 +68,8 @@ public:
 	void SetGravity(Entity::EVector3f _force);
 	void SetBodyPosition();
 	void Reset();
-	
+	void ClearForces();
+
 	// Toggle the color on this entities graphic component
 	void ToggleColor();
 

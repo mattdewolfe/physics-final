@@ -21,7 +21,6 @@ PhysicsManager* physicsManager = nullptr;
 InputComponent* inputComponent;
 VisualText* text;
 Entity* player;
-
 // Screen size
 int screenWidth = 640;
 int screenHeight = 480;
@@ -116,12 +115,12 @@ int main(int argc, char **argv)
 	
 	gc = new GraphicsComponent(GraphicsComponent::GST_Cube);
 	gc->SetOwner(&ent2);
-	gc->Init(4, 1);
+	gc->Init(2, 1);
 	gc->SetColor(COLOR_Red);
 	ent2.AddComponent(gc);
 
 	MovingPlatformComponent* mp = new MovingPlatformComponent();
-	mp->Init(85, 5);
+	mp->Init(5, 1);
 	mp->SetOwner(&ent2);
 	ent2.AddComponent(mp);
 
@@ -130,7 +129,7 @@ int main(int argc, char **argv)
 	// Define to obstacles to stand in the players way
 	// Define a platform to collide with
 	Entity ent3;
-	ent3.SetPosition(7, -5, 0);
+	ent3.SetPosition(8, 0, 0);
 
 	pc = new PhysicsComponent();
 	pc->SetOwner(&ent3);
@@ -139,14 +138,14 @@ int main(int argc, char **argv)
 	
 	gc = new GraphicsComponent(GraphicsComponent::GST_Cube);
 	gc->SetOwner(&ent3);
-	gc->Init(3, 1);
+	gc->Init(2, 1);
 	gc->SetColor(COLOR_Yellow);
 	ent3.AddComponent(gc);
 
 	entities.push_back(ent3);
 
 	Entity ent4;
-	ent4.SetPosition(-11, -5, 0);
+	ent4.SetPosition(-8, 0, 0);
 
 	pc = new PhysicsComponent();
 	pc->SetOwner(&ent4);
@@ -162,7 +161,7 @@ int main(int argc, char **argv)
 	entities.push_back(ent4);
 
 	Entity ent5;
-	ent5.SetPosition(0, 0, 0);
+	ent5.SetPosition(-4, -5, 0);
 
 	pc = new PhysicsComponent();
 	pc->SetOwner(&ent5);
@@ -171,14 +170,14 @@ int main(int argc, char **argv)
 	
 	gc = new GraphicsComponent(GraphicsComponent::GST_Cube);
 	gc->SetOwner(&ent5);
-	gc->Init(3, 1);
+	gc->Init(2, 1);
 	gc->SetColor(COLOR_Yellow);
 	ent5.AddComponent(gc);
 
 	entities.push_back(ent5);
 
 	Entity ent6;
-	ent6.SetPosition(11, 0, 0);
+	ent6.SetPosition(4, -5, 0);
 
 	pc = new PhysicsComponent();
 	pc->SetOwner(&ent6);
@@ -192,17 +191,24 @@ int main(int argc, char **argv)
 	ent6.AddComponent(gc);
 
 	entities.push_back(ent6);
+	DWORD prevTime = GetCurrentTime();
 
 	// Main loop
 	do
 	{
+		//add a real frame rate call here
+		DWORD currentTime = GetCurrentTime();
+		float deltaTime = (float)currentTime - (float)prevTime;
+		deltaTime *= 0.001;
+		prevTime = currentTime;
+		Update(deltaTime);
+		
+		Render(window);
+
 		while (SDL_PollEvent(&curEvent))
 		{
 			HandleEvents(&curEvent);
 		}
-		Update(FRAMERATE);
-		
-		Render(window);
 
 	} while (game_running);
 
@@ -217,11 +223,13 @@ void PlayerWon()
 
 void Reset()
 {
+	playerWon = false;
 	// Define the ball at the top of the screen
-	player->SetGravity(Entity::EVector3f(0, 0, 0));
+	inputComponent->Reset();
+	player->ClearForces();	
 	player->SetPosition(0, 15, 0);
 	player->SetBodyPosition();
-	inputComponent->Reset();
+	
 }
 
 void InitGL()

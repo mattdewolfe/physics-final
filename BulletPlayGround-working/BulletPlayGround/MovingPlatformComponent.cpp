@@ -11,11 +11,13 @@ void MovingPlatformComponent::Update(float deltaTime)
 {
 	float frame = moveSpeed * deltaTime;
 	offSet += frame;
-	if (abs(offSet) > abs(maxOffSet))
+	if ((offSet >= maxOffSet && moveSpeed > 0) || 
+		(offSet <= maxOffSet && moveSpeed < 0))
 	{
 		moveSpeed *= -1;
 		maxOffSet *= -1;
+		m_Owner->ClearForces();
 		m_Owner->ToggleColor();
 	}
-	m_Owner->ApplyForceAtCentre(Entity::EVector3f(frame, 0, 0));
+	m_Owner->ApplyImpulseForce(Entity::EVector3f(frame, 0, 0));
 }

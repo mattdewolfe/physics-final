@@ -129,12 +129,13 @@ void PhysicsComponent::Update(float DeltaTime)
 void PhysicsComponent::OnContactProcCallback(btManifoldPoint& cp, PhysicsComponent* collider)
 {
 	Entity* ent = collider->GetOwner();
-	if(ent)
+	MovingPlatformComponent* check = static_cast<MovingPlatformComponent*>(m_Owner->GetComponent(CT_PLATFORM));
+	if(ent && check == nullptr)
 	{
 		btRigidBody* rigidBody = collider->GetRigidBody();
 		float mass = rigidBody->getInvMass();
 		// check to see if we collided with a static object
-		if(mass < 1.0f)
+		if(mass < 0.1f)
 		{
 			m_rigidBody->applyCentralImpulse(btVector3(0,1,0));
 		}

@@ -67,6 +67,5 @@ void BallComponent::OnAddSingleResult(btManifoldPoint& cp,int partId0,int index0
 	if(physComp)
 	{
 		Entity* entOwner = physComp->GetOwner();
-		//entOwner->OnHit();
 	}
 }

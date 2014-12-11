@@ -1,8 +1,8 @@
-﻿Build started 12/11/2014 9:24:27 AM.
-     1>Project "C:\Users\mdewolfe\Desktop\BulletPlayGround-working\LinearMath\LinearMath.vcxproj" on node 4 (Build target(s)).
+﻿Build started 08/12/2014 4:37:45 PM.
+     1>Project "C:\Users\Matts\Desktop\BulletPlayGround-working\LinearMath\LinearMath.vcxproj" on node 3 (Build target(s)).
      1>Lib:
-         LinearMath.vcxproj -> C:\Users\mdewolfe\Desktop\BulletPlayGround-working\\bin\LinearMath_vs2010_debug.lib
-     1>Done Building Project "C:\Users\mdewolfe\Desktop\BulletPlayGround-working\LinearMath\LinearMath.vcxproj" (Build target(s)).
+         LinearMath.vcxproj -> C:\Users\Matts\Desktop\BulletPlayGround-working\\bin\LinearMath_vs2010_debug.lib
+     1>Done Building Project "C:\Users\Matts\Desktop\BulletPlayGround-working\LinearMath\LinearMath.vcxproj" (Build target(s)).
 
 Build succeeded.
 

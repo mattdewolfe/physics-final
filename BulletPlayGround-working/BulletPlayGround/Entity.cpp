@@ -12,8 +12,6 @@ void Entity::SetBodyPosition()
 	{
 		PhysicsComponent* temp = dynamic_cast<PhysicsComponent*>(m_Components[CT_PHYSICS]);
 		btVector3 position = btVector3(m_Position.x, m_Position.y, m_Position.z);
-		temp->GetRigidBody()->clearForces();
-		temp->GetRigidBody()->setAngularVelocity(btVector3(0, 0, 0));
 		temp->GetRigidBody()->setWorldTransform(btTransform(btQuaternion(0, 0, 0, 1), position));
 	}
 }
@@ -34,6 +32,16 @@ void Entity::Update(float deltaTime)
 	}
 }
 
+// Clear all forces acting on this body
+void Entity::ClearForces()
+{
+	if (m_Components[CT_PHYSICS] != nullptr)
+	{
+		PhysicsComponent* temp = dynamic_cast<PhysicsComponent*>(m_Components[CT_PHYSICS]);
+		temp->GetRigidBody()->clearForces();
+	}
+
+}
 // Apply a central force
 void Entity::ApplyForceAtCentre(Entity::EVector3f _force)
 {

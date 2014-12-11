@@ -1,9 +1,22 @@
-﻿Build started 12/11/2014 9:24:27 AM.
-     1>Project "C:\Users\mdewolfe\Desktop\BulletPlayGround-working\BulletPlayGround\BulletPlayGround.vcxproj" on node 2 (Build target(s)).
-     1>Link:
-         BulletPlayGround.vcxproj -> C:\Users\mdewolfe\Desktop\BulletPlayGround-working\Debug\BulletPlayGround.exe
-     1>Done Building Project "C:\Users\mdewolfe\Desktop\BulletPlayGround-working\BulletPlayGround\BulletPlayGround.vcxproj" (Build target(s)).
+﻿Build started 11/12/2014 4:38:02 PM.
+     1>Project "C:\Users\Matts\Desktop\BulletPlayGround-working\BulletPlayGround\BulletPlayGround.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         E:\Program Files\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc110.pdb" /Gd /TP /analyze- /errorReport:prompt PhysicsComponent.cpp
+         PhysicsComponent.cpp
+     1>c:\users\matts\desktop\bulletplayground-working\linearmath\btdefaultmotionstate.h(7): warning C4099: 'btDefaultMotionState' : type name first seen using 'class' now seen using 'struct'
+                 c:\users\matts\desktop\bulletplayground-working\bulletplayground\physicsmanager.h(14) : see declaration of 'btDefaultMotionState'
+       Link:
+         E:\Program Files\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Matts\Desktop\BulletPlayGround-working\Debug\BulletPlayGround.exe" /INCREMENTAL /NOLOGO /LIBPATH:"C:\Users\Matts\Desktop\BulletPlayGround-working\\bin\\" BulletCollision_vs2010_debug.lib BulletDynamics_vs2010_debug.lib LinearMath_vs2010_debug.lib SDL2.lib SDL2main.lib SDL2test.lib OpenGL32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Matts\Desktop\BulletPlayGround-working\Debug\BulletPlayGround.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Matts\Desktop\BulletPlayGround-working\Debug\BulletPlayGround.lib" /MACHINE:X86 Debug\BallComponent.obj
+         Debug\Entity.obj
+         Debug\GraphicsComponent.obj
+         Debug\InputComponent.obj
+         Debug\main.obj
+         Debug\MovingPlatformComponent.obj
+         Debug\PhysicsComponent.obj
+         Debug\PhysicsManager.obj
+         BulletPlayGround.vcxproj -> C:\Users\Matts\Desktop\BulletPlayGround-working\Debug\BulletPlayGround.exe
+     1>Done Building Project "C:\Users\Matts\Desktop\BulletPlayGround-working\BulletPlayGround\BulletPlayGround.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.06
+Time Elapsed 00:00:01.41
