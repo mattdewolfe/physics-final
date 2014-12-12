@@ -1,9 +1,9 @@
-﻿Build started 11/12/2014 9:12:53 PM.
-     1>Project "C:\Users\Matts\physics-final\BulletPlayGround-working\BulletDynamics\BulletDynamics.vcxproj" on node 3 (Build target(s)).
+﻿Build started 12/12/2014 8:40:59 AM.
+     1>Project "C:\Users\mdewolfe\physics-final\BulletPlayGround-working\BulletDynamics\BulletDynamics.vcxproj" on node 3 (Build target(s)).
      1>Lib:
-         BulletDynamics.vcxproj -> C:\Users\Matts\physics-final\BulletPlayGround-working\\bin\BulletDynamics_vs2010_debug.lib
-     1>Done Building Project "C:\Users\Matts\physics-final\BulletPlayGround-working\BulletDynamics\BulletDynamics.vcxproj" (Build target(s)).
+         BulletDynamics.vcxproj -> C:\Users\mdewolfe\physics-final\BulletPlayGround-working\\bin\BulletDynamics_vs2010_debug.lib
+     1>Done Building Project "C:\Users\mdewolfe\physics-final\BulletPlayGround-working\BulletDynamics\BulletDynamics.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.06
+Time Elapsed 00:00:00.07

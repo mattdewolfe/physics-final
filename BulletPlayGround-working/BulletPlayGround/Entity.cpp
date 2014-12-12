@@ -40,9 +40,12 @@ void Entity::ClearForces()
 	{
 		PhysicsComponent* temp = dynamic_cast<PhysicsComponent*>(m_Components[CT_PHYSICS]);
 		temp->GetRigidBody()->clearForces();
+		temp->GetRigidBody()->setLinearVelocity(btVector3(0, 0, 0));
+		temp->GetRigidBody()->setAngularVelocity(btVector3(0, 0, 0));
+		temp->GetRigidBody()->setGravity(btVector3(0, 0, 0));
 	}
-
 }
+
 // Apply a central force
 void Entity::ApplyForceAtCentre(Entity::EVector3f _force)
 {
