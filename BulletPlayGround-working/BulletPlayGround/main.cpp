@@ -156,6 +156,14 @@ void SetupLevelOne()
 
 void SetupLevelTwo()
 {
+	for(std::vector<Entity*>::iterator it = entities.begin(); it != entities.end(); ++it)
+	{
+		if ((*it)->CheckPlayerWon() == true)
+		{
+			entities.erase(it);
+			break;
+		}
+	}
 	// Define the ball at the top of the screen
 	player = new Entity();
 	player->SetPosition(0, 15, 0);
@@ -214,7 +222,7 @@ void SetupLevelTwo()
 
 	// Third Platform
 	Entity* ent3 = new Entity();
-	ent3->SetPosition(-4, -5, 0);
+	ent3->SetPosition(-2, -5, 0);
 
 	pc = new PhysicsComponent();
 	pc->SetOwner(ent3);
@@ -231,7 +239,7 @@ void SetupLevelTwo()
 
 	// Forth platform
 	Entity* ent4 = new Entity();
-	ent4->SetPosition(4, -5, 0);
+	ent4->SetPosition(3, -5, 0);
 
 	pc = new PhysicsComponent();
 	pc->SetOwner(ent4);

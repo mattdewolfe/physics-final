@@ -6,6 +6,8 @@ void MovingPlatformComponent::Init(float _maxOffSet, float _moveSpeed)
 	maxOffSet = _maxOffSet; 
 	moveSpeed = _moveSpeed;
 	offSet = 0;
+	colorDuration = 1.0f;
+	colorTimer = 0;
 	PhysicsComponent::Init(RBST_Box, 0.0f);
 }
 
@@ -18,12 +20,19 @@ void MovingPlatformComponent::Update(float deltaTime)
 	{
 		moveSpeed *= -1;
 		maxOffSet *= -1;
-	//	m_Owner->ToggleColor();
+		
 	}
+	// Increase color timer, and toggle when duration is hit
+	colorTimer += deltaTime;
+	if (colorTimer > colorDuration)
+	{
+		m_Owner->ToggleColor();
+		colorTimer = 0;
+	}
+		
 	m_Owner->SetPosition(Entity::EVector3f(offSet, -15, 0));
 	m_Owner->SetBodyPosition();
 
-	//PhysicsComponent::Update(deltaTime);
 }
 
 void MovingPlatformComponent::OnAddSingleResult(btManifoldPoint& cp,int partId0,int index0,const btCollisionObjectWrapper* collidedObjWrap,int collidedObjPartId,int collidedObjIndex)

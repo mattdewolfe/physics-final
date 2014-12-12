@@ -26,6 +26,8 @@ protected:
 	float offSet;
 	float maxOffSet;
 	float moveSpeed;
+	float colorTimer;
+	float colorDuration;
 };
 
 #endif

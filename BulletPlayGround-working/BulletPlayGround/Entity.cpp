@@ -28,7 +28,8 @@ void Entity::Update(float deltaTime)
 	for(std::map<int, Component*>::iterator it = m_Components.begin(); it != m_Components.end(); ++it)
 	{
 		// Should check to ensure a component exists
-		(*it).second->Update(deltaTime);
+		if ((*it).second != nullptr)
+			(*it).second->Update(deltaTime);
 	}
 }
 
@@ -88,7 +89,8 @@ void Entity::Render()
 {
 	for(std::map<int, Component*>::iterator it = m_Components.begin(); it != m_Components.end(); ++it)
 	{
-		(*it).second->Render();
+		if ((*it).second != nullptr)
+			(*it).second->Render();
 	}
 }
 
