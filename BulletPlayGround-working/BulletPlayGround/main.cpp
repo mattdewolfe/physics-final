@@ -16,7 +16,7 @@
 bool game_running = true;
 bool playerWon = false;
 
-std::vector<Entity> entities;
+std::vector<Entity*> entities;
 PhysicsManager* physicsManager = nullptr;
 InputComponent* inputComponent;
 VisualText* text;
@@ -34,7 +34,9 @@ void Update(float dt);
 void Render(SDL_Window* window);
 void PlayerWon();
 void Reset();
-
+void SetupLevelOne();
+void SetupLevelTwo();
+int currentLevel = 1;
 float FRAMERATE = 1.0f/60.0f;
 
 int main(int argc, char **argv)
@@ -83,114 +85,8 @@ int main(int argc, char **argv)
 	physicsManager = new PhysicsManager();
 	physicsManager->Init();
 
-	// Define the ball at the top of the screen
-	player = new Entity();
-	player->SetPosition(0, 15, 0);
-	
-	inputComponent = new InputComponent();
-	inputComponent->SetOwner(player);
-	player->AddComponent(inputComponent);
+	SetupLevelOne();
 
-	BallComponent* bc = new BallComponent();
-	bc->SetOwner(player);
-	bc->Init(PhysicsComponent::RBST_Sphere, 1.0f);
-	player->AddComponent(bc);
-
-	GraphicsComponent* gc = new GraphicsComponent(GraphicsComponent::GST_Sphere);
-	gc->SetOwner(player);
-	gc->Init(0, 0);
-	gc->SetColor(COLOR_Red);
-	player->AddComponent(gc);
-
-	entities.push_back(*player);
-
-	// Define the platform to move back and forth
-	Entity ent2;
-	ent2.SetPosition(-10, -15, 0);
-
-	PhysicsComponent* pc = new PhysicsComponent();
-	pc->SetOwner(&ent2);
-	pc->Init(PhysicsComponent::RBST_Box, 1.0f);
-	ent2.AddComponent(pc);
-	
-	gc = new GraphicsComponent(GraphicsComponent::GST_Cube);
-	gc->SetOwner(&ent2);
-	gc->Init(2, 1);
-	gc->SetColor(COLOR_Red);
-	ent2.AddComponent(gc);
-
-	MovingPlatformComponent* mp = new MovingPlatformComponent();
-	mp->Init(5, 1);
-	mp->SetOwner(&ent2);
-	ent2.AddComponent(mp);
-
-	entities.push_back(ent2);
-
-	// Define to obstacles to stand in the players way
-	// Define a platform to collide with
-	Entity ent3;
-	ent3.SetPosition(8, 0, 0);
-
-	pc = new PhysicsComponent();
-	pc->SetOwner(&ent3);
-	pc->Init(PhysicsComponent::RBST_Box, 0.0f);
-	ent3.AddComponent(pc);
-	
-	gc = new GraphicsComponent(GraphicsComponent::GST_Cube);
-	gc->SetOwner(&ent3);
-	gc->Init(2, 1);
-	gc->SetColor(COLOR_Yellow);
-	ent3.AddComponent(gc);
-
-	entities.push_back(ent3);
-
-	Entity ent4;
-	ent4.SetPosition(-8, 0, 0);
-
-	pc = new PhysicsComponent();
-	pc->SetOwner(&ent4);
-	pc->Init(PhysicsComponent::RBST_Box, 0.0f);
-	ent4.AddComponent(pc);
-	
-	gc = new GraphicsComponent(GraphicsComponent::GST_Cube);
-	gc->SetOwner(&ent4);
-	gc->Init(2, 1);
-	gc->SetColor(COLOR_Yellow);
-	ent4.AddComponent(gc);
-
-	entities.push_back(ent4);
-
-	Entity ent5;
-	ent5.SetPosition(-4, -5, 0);
-
-	pc = new PhysicsComponent();
-	pc->SetOwner(&ent5);
-	pc->Init(PhysicsComponent::RBST_Box, 0.0f);
-	ent5.AddComponent(pc);
-	
-	gc = new GraphicsComponent(GraphicsComponent::GST_Cube);
-	gc->SetOwner(&ent5);
-	gc->Init(2, 1);
-	gc->SetColor(COLOR_Yellow);
-	ent5.AddComponent(gc);
-
-	entities.push_back(ent5);
-
-	Entity ent6;
-	ent6.SetPosition(4, -5, 0);
-
-	pc = new PhysicsComponent();
-	pc->SetOwner(&ent6);
-	pc->Init(PhysicsComponent::RBST_Box, 0.0f);
-	ent6.AddComponent(pc);
-	
-	gc = new GraphicsComponent(GraphicsComponent::GST_Cube);
-	gc->SetOwner(&ent6);
-	gc->Init(2, 1);
-	gc->SetColor(COLOR_Yellow);
-	ent6.AddComponent(gc);
-
-	entities.push_back(ent6);
 	DWORD prevTime = GetCurrentTime();
 
 	// Main loop
@@ -216,9 +112,152 @@ int main(int argc, char **argv)
 	return 0;
 }
 
+void SetupLevelOne()
+{
+	// Define the ball at the top of the screen
+	player = new Entity();
+	player->SetPosition(0, 15, 0);
+	
+	inputComponent = new InputComponent();
+	inputComponent->SetOwner(player);
+	player->AddComponent(inputComponent);
+
+	BallComponent* bc = new BallComponent();
+	bc->SetOwner(player);
+	bc->Init(PhysicsComponent::RBST_Sphere, 1.0f);
+	player->AddComponent(bc);
+
+	GraphicsComponent* gc = new GraphicsComponent(GraphicsComponent::GST_Sphere);
+	gc->SetOwner(player);
+	gc->Init(0, 0);
+	gc->SetColor(COLOR_Red);
+	player->AddComponent(gc);
+
+	entities.push_back(player);
+
+	// Define the platform to move back and forth
+	Entity* ent2;
+	ent2 = new Entity();
+	ent2->SetPosition(-10, -15, 0);
+
+	MovingPlatformComponent* mp = new MovingPlatformComponent();
+	mp->SetOwner(ent2);
+	mp->Init(15, 7);
+	ent2->AddComponent(mp);
+
+	gc = new GraphicsComponent(GraphicsComponent::GST_Cube);
+	gc->SetOwner(ent2);
+	gc->Init(2, 1);
+	gc->SetColor(COLOR_Red);
+	ent2->AddComponent(gc);
+	
+	entities.push_back(ent2);
+}
+
+void SetupLevelTwo()
+{
+	// Define the ball at the top of the screen
+	player = new Entity();
+	player->SetPosition(0, 15, 0);
+	
+	inputComponent = new InputComponent();
+	inputComponent->SetOwner(player);
+	player->AddComponent(inputComponent);
+
+	BallComponent* bc = new BallComponent();
+	bc->SetOwner(player);
+	bc->Init(PhysicsComponent::RBST_Sphere, 1.0f);
+	player->AddComponent(bc);
+
+	GraphicsComponent* gc = new GraphicsComponent(GraphicsComponent::GST_Sphere);
+	gc->SetOwner(player);
+	gc->Init(0, 0);
+	gc->SetColor(COLOR_Red);
+	player->AddComponent(gc);
+
+	entities.push_back(player);
+	// Define to obstacles to stand in the players way
+	// Define a platform to collide with
+	Entity* ent1;
+	ent1 = new Entity();
+	ent1->SetPosition(8, 0, 0);
+
+	PhysicsComponent* pc = new PhysicsComponent();
+	pc->SetOwner(ent1);
+	pc->Init(PhysicsComponent::RBST_Box, 0.0f);
+	ent1->AddComponent(pc);
+	
+	gc = new GraphicsComponent(GraphicsComponent::GST_Cube);
+	gc->SetOwner(ent1);
+	gc->Init(2, 1);
+	gc->SetColor(COLOR_Yellow);
+	ent1->AddComponent(gc);
+
+	entities.push_back(ent1);
+
+	// Second platform
+	Entity* ent2 = new Entity();
+	ent2->SetPosition(-8, 0, 0);
+
+	pc = new PhysicsComponent();
+	pc->SetOwner(ent2);
+	pc->Init(PhysicsComponent::RBST_Box, 0.0f);
+	ent2->AddComponent(pc);
+	
+	gc = new GraphicsComponent(GraphicsComponent::GST_Cube);
+	gc->SetOwner(ent2);
+	gc->Init(2, 1);
+	gc->SetColor(COLOR_Yellow);
+	ent2->AddComponent(gc);
+
+	entities.push_back(ent2);
+
+	// Third Platform
+	Entity* ent3 = new Entity();
+	ent3->SetPosition(-4, -5, 0);
+
+	pc = new PhysicsComponent();
+	pc->SetOwner(ent3);
+	pc->Init(PhysicsComponent::RBST_Box, 0.0f);
+	ent3->AddComponent(pc);
+	
+	gc = new GraphicsComponent(GraphicsComponent::GST_Cube);
+	gc->SetOwner(ent3);
+	gc->Init(2, 1);
+	gc->SetColor(COLOR_Yellow);
+	ent3->AddComponent(gc);
+
+	entities.push_back(ent3);
+
+	// Forth platform
+	Entity* ent4 = new Entity();
+	ent4->SetPosition(4, -5, 0);
+
+	pc = new PhysicsComponent();
+	pc->SetOwner(ent4);
+	pc->Init(PhysicsComponent::RBST_Box, 0.0f);
+	ent4->AddComponent(pc);
+	
+	gc = new GraphicsComponent(GraphicsComponent::GST_Cube);
+	gc->SetOwner(ent4);
+	gc->Init(2, 1);
+	gc->SetColor(COLOR_Yellow);
+	ent4->AddComponent(gc);
+
+	entities.push_back(ent4);
+}
+
 void PlayerWon()
 {
-	playerWon = true;
+	if (currentLevel == 1)
+	{
+		currentLevel = 2;
+		SetupLevelTwo();
+	}
+	else
+	{
+		playerWon = true;
+	}
 }
 
 void Reset()
@@ -228,8 +267,7 @@ void Reset()
 	inputComponent->Reset();
 	player->ClearForces();	
 	player->SetPosition(0, 15, 0);
-	player->SetBodyPosition();
-	
+	player->SetBodyPosition();	
 }
 
 void InitGL()
@@ -292,13 +330,13 @@ void Update(float dt)
 	if (isPaused == false)
 	{
 		physicsManager->Update(dt);
-		for(std::vector<Entity>::iterator it = entities.begin(); it != entities.end(); ++it)
+		for(std::vector<Entity*>::iterator it = entities.begin(); it != entities.end(); ++it)
 		{
-			(*it).Update(dt);
-			if ((*it).CheckPlayerWon() == true)
-			{
-				PlayerWon();
-			}
+			(*it)->Update(dt);
+		}
+		if (player->CheckPlayerWon() == true)
+		{
+			PlayerWon();
 		}
 	}
 }
@@ -333,10 +371,10 @@ void Render(SDL_Window *window)
 		text->WriteBitmapString(-14, 9, "Press p to resume");
 	}
 	
-	for(std::vector<Entity>::iterator it = entities.begin(); it != entities.end(); ++it)
+	for(std::vector<Entity*>::iterator it = entities.begin(); it != entities.end(); ++it)
 	{
         glPushMatrix();
-		(*it).Render();
+		(*it)->Render();
         glPopMatrix();
 	}
 

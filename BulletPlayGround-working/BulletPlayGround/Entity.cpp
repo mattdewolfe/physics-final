@@ -20,7 +20,7 @@ void Entity::AddComponent(Component* component)
 	if(component->GetOwner() == nullptr)
 		component->SetOwner(this);
 
-	m_Components[component->GetComponentType()] = component;
+	m_Components[(int)component->GetComponentType()] = component;
 }
 
 void Entity::Update(float deltaTime) 

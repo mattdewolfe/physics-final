@@ -3,21 +3,23 @@
 #define MOVING_PLATFORM_COMPONENT_H
 
 #include "Entity.h"
-#include "Component.h"
+#include "PhysicsComponent.h"
 
-class MovingPlatformComponent : public Component
+class MovingPlatformComponent : public PhysicsComponent
 {
 public:
 	MovingPlatformComponent() :
-		Component(CT_PLATFORM) {}
+		PhysicsComponent() {}
 	virtual ~MovingPlatformComponent() {}
 
 	void Init(float _maxOffSet, float _moveSpeed);
 	virtual void Shutdown() {}
 
-	virtual void Update(float deltaTime) override;
+	virtual void Update(float deltaTime);
 	
 	virtual void Render() {}
+	virtual void OnAddSingleResult(btManifoldPoint& cp,int partId0,int index0,const btCollisionObjectWrapper* collidedObjWrap,int collidedObjPartId,int collidedObjIndex) override;
+	virtual void OnContactProcCallback(btManifoldPoint& cp, PhysicsComponent* collider) override;
 
 protected:
 	static Entity::EVector3f colours[4];
